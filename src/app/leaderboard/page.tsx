@@ -38,7 +38,6 @@ export default async function Leaderboard() {
   const players = await prisma.user.findMany({
     where: {
       level: { gt: 1 },
-      lastPromotedAt: { not: null },
     },
     select: {
       id: true,
@@ -198,8 +197,8 @@ export default async function Leaderboard() {
 
                   {/* Level */}
                   <div className="col-span-3 text-center">
-                    <span className="inline-flex items-center gap-1.5 text-sm font-black text-primary">
-                      <Medal size={14} /> LEVEL {player.level}
+                    <span className={`inline-flex items-center gap-1.5 text-sm font-black ${player.level >= 5 ? 'text-green-400' : 'text-primary'}`}>
+                      <Medal size={14} /> {player.level >= 5 ? 'COMPLETED' : `LEVEL ${player.level}`}
                     </span>
                   </div>
 

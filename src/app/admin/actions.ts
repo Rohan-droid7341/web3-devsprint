@@ -15,7 +15,7 @@ export async function promotePlayer(userId: string) {
     select: { level: true },
   });
 
-  if (user && user.level < 4) {
+  if (user && user.level < 5) {
     await prisma.user.update({
       where: { id: userId },
       data: {
