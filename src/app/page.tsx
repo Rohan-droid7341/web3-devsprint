@@ -5,7 +5,7 @@ export default async function Home() {
   const session = await auth();
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen flex flex-col items-center justify-center">
       <div className="container text-center space-y-12 py-20 flex flex-col items-center">
         <header className="space-y-6">
           <h1 className="text-8xl sm:text-9xl font-black tracking-tight">

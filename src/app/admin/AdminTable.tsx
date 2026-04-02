@@ -27,14 +27,13 @@ export function AdminTable({ users }: { users: UserEntry[] }) {
   return (
     <div className="space-y-4">
       {/* Search Bar */}
-      <div className="relative">
-        <Search size={16} className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-600" />
+      <div className="relative ">
         <input
           type="text"
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by name or email..."
-          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-11 pr-4 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition"
+          placeholder="     Search by name or email..."
+          className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-12 pr-20 text-sm text-white placeholder:text-gray-600 focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/20 transition font-sans ml-5"
         />
         {search && (
           <span className="absolute right-4 top-1/2 -translate-y-1/2 text-[10px] text-gray-500 font-bold uppercase tracking-wider">
@@ -44,15 +43,15 @@ export function AdminTable({ users }: { users: UserEntry[] }) {
       </div>
 
       {/* Table */}
-      <div className="glass !p-0 overflow-hidden border-primary/20">
+      <div className="glass !p-2 overflow-hidden border-primary/20">
         <div className="overflow-x-auto">
-          <table className="w-full text-left border-collapse">
+          <table className="w-full text-left border-collapse table-fixed">
             <thead>
               <tr className="bg-primary/5 border-b border-white/5">
-                <th className="p-4 text-gray-400 uppercase text-[10px] tracking-widest font-black">Participant</th>
-                <th className="p-4 text-gray-400 uppercase text-[10px] tracking-widest font-black">College Email</th>
-                <th className="p-4 text-gray-400 uppercase text-[10px] tracking-widest font-black text-center">Status</th>
-                <th className="p-4 text-gray-400 uppercase text-[10px] tracking-widest font-black text-right">Actions</th>
+                <th className="p-4 text-gray-400 uppercase text-[10px] tracking-widest font-black w-[30%]">Participant</th>
+                <th className="p-4 text-gray-400 uppercase text-[10px] tracking-widest font-black w-[30%]">College Email</th>
+                <th className="p-4 text-gray-400 uppercase text-[10px] tracking-widest font-black text-center w-[20%]">Status</th>
+                <th className="p-4 text-gray-400 uppercase text-[10px] tracking-widest font-black text-center w-[20%]">Actions</th>
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
@@ -87,7 +86,7 @@ export function AdminTable({ users }: { users: UserEntry[] }) {
                       )}
                     </div>
                   </td>
-                  <td className="p-4 text-right space-x-3">
+                  <td className="p-4 text-center">
                     {u.level < 5 && (
                       <form action={promotePlayer.bind(null, u.id)} className="inline">
                         <button
