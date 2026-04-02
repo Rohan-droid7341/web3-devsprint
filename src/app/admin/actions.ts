@@ -18,10 +18,14 @@ export async function promotePlayer(userId: string) {
   if (user && user.level < 4) {
     await prisma.user.update({
       where: { id: userId },
-      data: { level: user.level + 1 },
+      data: {
+        level: user.level + 1,
+        lastPromotedAt: new Date(),
+      },
     });
     revalidatePath("/admin");
     revalidatePath("/dashboard");
+    revalidatePath("/leaderboard");
   }
 }
 
@@ -38,22 +42,43 @@ export async function makeAdmin(userId: string) {
   revalidatePath("/admin");
 }
 
+export async function startCompetitionTimer() {
+  const session = await auth();
+  if ((session?.user as any)?.role !== "ADMIN") {
+    throw new Error("Unauthorized");
+  }
+
+  await prisma.settings.upsert({
+    where: { key: "competition_start" },
+    update: { value: new Date().toISOString() },
+    create: { key: "competition_start", value: new Date().toISOString() },
+  });
+  revalidatePath("/leaderboard");
+  revalidatePath("/admin");
+}
+
+export async function resetCompetitionTimer() {
+  const session = await auth();
+  if ((session?.user as any)?.role !== "ADMIN") {
+    throw new Error("Unauthorized");
+  }
+
+  await prisma.settings.deleteMany({ where: { key: "competition_start" } });
+  revalidatePath("/leaderboard");
+  revalidatePath("/admin");
+}
+
 export async function getGistContent(gistUrl: string) {
-    try {
-        // Construct the raw URL: https://gist.github.com/user/id -> https://gist.githubusercontent.com/user/id/raw
-        const rawUrl = gistUrl.replace("gist.github.com", "gist.githubusercontent.com") + "/raw";
-
-        // Fetch raw text directly
-        const response = await fetch(rawUrl, {
-            next: { revalidate: 300 } // Cache for 5 mins
-        });
-
-        if (!response.ok) throw new Error("Failed to fetch raw Gist");
-
-        const content = await response.text();
-        return content;
-    } catch (error) {
-        console.error("Gist Fetch Error:", error);
-        return "Could not retrieve task content. Please verify your connection or contact an admin.";
-    }
+  try {
+    const rawUrl = gistUrl.replace("gist.github.com", "gist.githubusercontent.com") + "/raw";
+    const response = await fetch(rawUrl, {
+      next: { revalidate: 300 },
+    });
+    if (!response.ok) throw new Error("Failed to fetch raw Gist");
+    const content = await response.text();
+    return content;
+  } catch (error) {
+    console.error("Gist Fetch Error:", error);
+    return "Could not retrieve task content. Please verify your connection or contact an admin.";
+  }
 }

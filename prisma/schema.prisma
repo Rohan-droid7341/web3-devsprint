@@ -15,8 +15,14 @@ model User {
   image         String?
   role          String    @default("PLAYER")
   level         Int       @default(1)
+  lastPromotedAt DateTime?
   accounts      Account[]
   sessions      Session[]
+}
+
+model Settings {
+  key   String @id
+  value String
 }
 
 model Account {

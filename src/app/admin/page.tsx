@@ -2,7 +2,7 @@ import { auth } from "@/auth";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/prisma";
 import { promotePlayer, makeAdmin } from "./actions";
-import { Shield, User, ArrowUpCircle, Crown, ChevronLeft } from "lucide-react";
+import { Shield, User, ArrowUpCircle, Crown, ChevronLeft, Trophy } from "lucide-react";
 import Link from "next/link";
 
 export default async function AdminPanel() {
@@ -29,10 +29,15 @@ export default async function AdminPanel() {
               <h1 className="text-6xl font-black font-heading uppercase tracking-tight">GUARDIANS'S CONSOLE</h1>
             </div>
           </div>
-          <Link href="/dashboard" className="text-gray-500 hover:text-white transition-colors uppercase text-sm font-black tracking-[0.2em] flex items-center gap-2 group border border-white/10 px-8 py-4 rounded-xl">
-            <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
-             Return to Arena
-          </Link>
+          <div className="flex items-center gap-4">
+            <Link href="/leaderboard" className="gold-button !py-3 !px-6 !text-xs flex items-center gap-2">
+              <Trophy size={16} /> Leaderboard
+            </Link>
+            <Link href="/dashboard" className="text-gray-500 hover:text-white transition-colors uppercase text-sm font-black tracking-[0.2em] flex items-center gap-2 group border border-white/10 px-8 py-4 rounded-xl">
+              <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" />
+               Return to Arena
+            </Link>
+          </div>
         </header>
 
         <section className="glass p-0 overflow-hidden border-primary/20">

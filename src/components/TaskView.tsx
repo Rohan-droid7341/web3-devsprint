@@ -29,7 +29,7 @@ export const TaskView: React.FC<TaskViewProps> = ({ levelTitle, gistUrl }) => {
     try {
       new URL(text.trim());
       return true;
-    } catch (_) {
+    } catch {
       return false;
     }
   };
@@ -37,9 +37,9 @@ export const TaskView: React.FC<TaskViewProps> = ({ levelTitle, gistUrl }) => {
   const renderContent = () => {
     if (isLoading) {
       return (
-        <div className="flex flex-col items-center justify-center py-20 gap-4">
-          <Loader2 className="animate-spin text-primary" size={48} />
-          <p className="text-gray-500 uppercase tracking-widest font-black text-xs">Decrypting Arena Data...</p>
+        <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "4rem 0", gap: "1rem" }}>
+          <Loader2 className="animate-spin" size={48} style={{ color: "var(--primary)" }} />
+          <p style={{ color: "#666", textTransform: "uppercase", letterSpacing: "0.15em", fontWeight: 900, fontSize: "0.75rem" }}>Decrypting Arena Data...</p>
         </div>
       );
     }
@@ -50,35 +50,58 @@ export const TaskView: React.FC<TaskViewProps> = ({ levelTitle, gistUrl }) => {
     const isSingleUrl = isUrl(trimmedContent);
 
     return (
-      <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500">
-        <div className="flex items-center gap-3 text-primary mb-2">
+      <div>
+        {/* Label */}
+        <div style={{ display: "flex", alignItems: "center", gap: "0.75rem", color: "var(--primary)", marginBottom: "1.5rem" }}>
           {isSingleUrl ? <LinkIcon size={20} /> : <FileText size={20} />}
-          <span className="uppercase font-black tracking-widest text-xs">
-            {isSingleUrl ? 'External Access Node' : 'Decrypted Task Protocol'}
+          <span style={{ textTransform: "uppercase", fontWeight: 900, letterSpacing: "0.15em", fontSize: "0.75rem" }}>
+            {isSingleUrl ? "External Access Link" : "Decrypted Task Protocol"}
           </span>
         </div>
 
-        <div className="bg-white/5 p-10 rounded-2xl border border-white/5 relative group">
+        {/* Content box */}
+        <div style={{
+          background: "rgba(255,255,255,0.03)",
+          padding: "2rem",
+          borderRadius: "16px",
+          border: "1px solid rgba(255,255,255,0.05)",
+        }}>
           {isSingleUrl ? (
-            <div className="flex flex-col items-center gap-6 py-4">
-              <p className="text-gray-400 text-center italic">The task resource is located outside the arena's perimeter.</p>
-              <a 
-                href={trimmedContent} 
-                target="_blank" 
-                rel="noopener noreferrer" 
-                className="gold-button !px-12 flex items-center gap-3"
+            <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.5rem", padding: "1rem 0" }}>
+              <p style={{ color: "#888", textAlign: "center", fontStyle: "italic" }}>The task resource is located outside the arena.</p>
+              <a
+                href={trimmedContent}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="gold-button"
+                style={{ display: "inline-flex", alignItems: "center", gap: "0.75rem" }}
               >
                 ACCESS EXTERNAL RESOURCE <ExternalLink size={18} />
               </a>
             </div>
           ) : (
-            <pre className="text-white text-xl font-medium leading-relaxed whitespace-pre-wrap font-mono selection:bg-primary selection:text-black">
+            <pre style={{
+              color: "#fff",
+              fontSize: "1.15rem",
+              fontWeight: 500,
+              lineHeight: 1.8,
+              whiteSpace: "pre-wrap",
+              wordBreak: "break-word",
+              fontFamily: "'Outfit', monospace",
+            }}>
               {trimmedContent}
             </pre>
           )}
         </div>
-        
-        <p className="text-gray-600 text-xs text-center uppercase tracking-[0.2em] pt-4">
+
+        <p style={{
+          color: "#444",
+          fontSize: "0.7rem",
+          textAlign: "center",
+          textTransform: "uppercase",
+          letterSpacing: "0.2em",
+          marginTop: "2rem",
+        }}>
           Strictly Confidential &bull; Physical Presence Verification Required
         </p>
       </div>
@@ -87,17 +110,18 @@ export const TaskView: React.FC<TaskViewProps> = ({ levelTitle, gistUrl }) => {
 
   return (
     <>
-      <button 
+      <button
         onClick={handleOpen}
-        className="gold-button !py-3 !px-8 text-sm flex items-center gap-2 group active:scale-95 transition-transform"
+        className="gold-button"
+        style={{ fontSize: "0.75rem", padding: "0.5rem 1.5rem", display: "inline-flex", alignItems: "center", gap: "0.4rem" }}
       >
-        DISCOVER TASK <ExternalLink size={18} className="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+        DISCOVER TASK <ExternalLink size={18} />
       </button>
 
-      <Modal 
-        isOpen={isOpen} 
-        onClose={() => setIsOpen(false)} 
-        title={`${levelTitle} Task`}
+      <Modal
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+        title={`${levelTitle} — Task`}
       >
         {renderContent()}
       </Modal>
