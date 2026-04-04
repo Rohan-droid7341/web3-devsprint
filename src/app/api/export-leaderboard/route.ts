@@ -24,7 +24,10 @@ export async function GET() {
   const competitionStart = startSetting ? new Date(startSetting.value) : null;
 
   const players = await prisma.user.findMany({
-    where: { level: { gt: 1 } },
+    where: { 
+      level: { gt: 1 },
+      role: { not: "ADMIN" }, 
+    },
     orderBy: [
       { level: "desc" },
       { lastPromotedAt: "asc" },

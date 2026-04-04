@@ -38,6 +38,7 @@ export default async function Leaderboard() {
   const players = await prisma.user.findMany({
     where: {
       level: { gt: 1 },
+      role: { not: "ADMIN" },
     },
     select: {
       id: true,
