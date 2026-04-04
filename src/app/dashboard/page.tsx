@@ -4,6 +4,7 @@ import { LEVELS } from "@/data/levels";
 import { LogOut, Trophy, Lock, Unlock, ExternalLink } from "lucide-react";
 import { signOut } from "@/auth";
 import { TaskView } from "@/components/TaskView";
+import { TeamSetupModal } from "@/components/TeamSetupModal";
 
 export default async function Dashboard() {
   const session = await auth();
@@ -17,6 +18,8 @@ export default async function Dashboard() {
 
   return (
     <div className="min-h-screen pb-20">
+      <TeamSetupModal />
+      
       {/* Navigation Header */}
       <header className="glass p-6 sticky top-0 z-50 rounded-none border-t-0 border-x-0 mb-12 py-6">
         <div className="container flex items-center justify-between">

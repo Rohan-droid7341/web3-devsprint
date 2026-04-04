@@ -81,6 +81,10 @@ export default async function Leaderboard() {
             </h1>
           </div>
           <div className="flex items-center gap-4">
+            <a href="/api/export-leaderboard" download className="text-primary hover:text-white transition text-xs font-bold uppercase tracking-widest flex items-center gap-2 border border-primary/20 px-3 py-1 rounded-md bg-primary/10">
+              Download CSV
+            </a>
+            <span className="w-px h-4 bg-white/10 mx-2"></span>
             <Link href="/admin" className="text-gray-500 hover:text-white transition text-xs font-bold uppercase tracking-widest">
               Admin Panel
             </Link>
@@ -153,7 +157,7 @@ export default async function Leaderboard() {
           {/* Table header */}
           <div className="grid grid-cols-12 gap-2 px-5 py-3 bg-primary/5 border-b border-primary/10 text-[10px] text-gray-500 uppercase tracking-widest font-black">
             <div className="col-span-1 text-center">#</div>
-            <div className="col-span-5">Player</div>
+            <div className="col-span-5">Team</div>
             <div className="col-span-3 text-center">Level</div>
             <div className="col-span-3 text-center">Time</div>
           </div>

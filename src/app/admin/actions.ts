@@ -82,3 +82,16 @@ export async function getGistContent(gistUrl: string) {
     return "Could not retrieve task content. Please verify your connection or contact an admin.";
   }
 }
+
+export async function updateTeamName(newName: string) {
+  const session = await auth();
+  if (!session?.user?.id) throw new Error("Unauthorized");
+
+  await prisma.user.update({
+    where: { id: session.user.id },
+    data: { name: newName },
+  });
+  
+  revalidatePath("/dashboard");
+  revalidatePath("/leaderboard");
+}
