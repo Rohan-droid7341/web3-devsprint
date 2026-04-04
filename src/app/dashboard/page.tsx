@@ -94,9 +94,11 @@ export default async function Dashboard() {
                     {isUnlocked ? (
                       <div className="space-y-3">
                         <p className="text-gray-400 text-sm font-light italic leading-relaxed">"{level.description}"</p>
-                        <div className="bg-white/5 p-4 rounded-xl border border-white/5">
-                          <p className="text-white text-base font-medium leading-relaxed">{level.content}</p>
-                        </div>
+                        {level.content && (
+                          <div className="bg-white/5 p-4 rounded-xl border border-white/5">
+                            <p className="text-white text-base font-medium leading-relaxed">{level.content}</p>
+                          </div>
+                        )}
                         <div className="flex flex-wrap gap-4 items-center pt-2">
                            <TaskView levelTitle={level.title} gistUrl={level.link || ""} />
                            {isCurrent && (

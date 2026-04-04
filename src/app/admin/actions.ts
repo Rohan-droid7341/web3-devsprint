@@ -70,9 +70,9 @@ export async function resetCompetitionTimer() {
 
 export async function getGistContent(gistUrl: string) {
   try {
-    const rawUrl = gistUrl.replace("gist.github.com", "gist.githubusercontent.com") + "/raw";
+    const rawUrl = gistUrl.replace("gist.github.com", "gist.githubusercontent.com") + "/raw?t=" + Date.now();
     const response = await fetch(rawUrl, {
-      next: { revalidate: 300 },
+      cache: 'no-store',
     });
     if (!response.ok) throw new Error("Failed to fetch raw Gist");
     const content = await response.text();

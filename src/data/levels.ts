@@ -1,17 +1,24 @@
-export const LEVELS = [
+export interface Level {
+  level: number;
+  title: string;
+  description: string;
+  content?: string;
+  badges: string[];
+  link: string | undefined;
+}
+
+export const LEVELS: Level[] = [
   {
     level: 1,
     title: "The Genesis",
-    description: "The first block in the blockchain",
-    content: "Simple WEB3 quiz to get started ",
+    description: "Every master was once a beginner — understand the blocks before you build the chain.",
     badges: ["Badge 1: Bronze"],
     link: process.env.LEVEL_1_GIST 
   },
   {
     level: 2,
-    title: "Mastering Smart Contracts",
-    description: "Move beyond the basics and dive into the logic of the machine.",
-    content: "Task: Carefully read the instructions in the Gist and complete the smart contract challenge. Present your solution to the admins.",
+    title: "Hacker's Gambit",
+    description: "In the sea of bytes, only the precise transaction finds the shore.",
     badges: ["Badge 2: Silver"],
     link: process.env.LEVEL_2_GIST 
   },
@@ -19,15 +26,13 @@ export const LEVELS = [
     level: 3,
     title: "The Architecture of Trust",
     description: "Deep dive into the structural integrity of decentralized systems.",
-    content: "Task: Study the architectural requirements provided in the manual. Build a diagram or mockup and explain it to the admins.",
     badges: ["Badge 3: Gold"],
     link: process.env.LEVEL_3_GIST 
   },
   {
     level: 4,
-    title: "The Final Sprint",
-    description: "The ultimate challenge. Integrate everything you've learned into a final masterpiece.",
-    content: "Task: Access the final Repository through the Gist below. Follow the README to complete the sprint.",
+    title: "The Final Audit",
+    description: "Logic is the law, but time is the loophole; secure the state or lose the system.",
     badges: ["Badge 4: Level Devil"],
     link: process.env.LEVEL_4_GIST
   }
