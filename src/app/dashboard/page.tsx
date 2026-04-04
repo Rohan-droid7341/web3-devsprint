@@ -53,7 +53,6 @@ export default async function Dashboard() {
           <div className="lg:col-span-8 space-y-6">
             <header className="space-y-2">
               <h2 className="text-3xl font-black tracking-tight uppercase">ARENA PROGRESS</h2>
-              <p className="text-sm text-gray-500 max-w-2xl">Your journey through the decentralized mind. Progress by proving your mastery to the Guardians.</p>
             </header>
             
             <div className="space-y-4">
@@ -136,11 +135,7 @@ export default async function Dashboard() {
                   })}
                </div>
                
-               <div className="pt-6 border-t border-white/10 mt-6 space-y-2">
-                 <p className="text-gray-400 text-sm italic font-light">
-                   Advance levels through physical verification with event admins.
-                 </p>
-               </div>
+               
             </div>
           </aside>
         </div>

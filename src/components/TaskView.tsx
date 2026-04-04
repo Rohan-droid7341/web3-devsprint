@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { Modal } from "./Modal";
 import { getGistContent } from "@/app/admin/actions";
 import { ExternalLink, Loader2, FileText, Link as LinkIcon } from "lucide-react";
+import { McqQuiz } from "./McqQuiz";
 
 interface TaskViewProps {
   levelTitle: string;
@@ -35,6 +36,10 @@ export const TaskView: React.FC<TaskViewProps> = ({ levelTitle, gistUrl }) => {
   };
 
   const renderContent = () => {
+    if (levelTitle === "The Genesis") {
+      return <McqQuiz />;
+    }
+
     if (isLoading) {
       return (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center", padding: "4rem 0", gap: "1rem" }}>

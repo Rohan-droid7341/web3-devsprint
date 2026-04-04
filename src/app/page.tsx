@@ -22,7 +22,7 @@ export default async function Home() {
             <h2 className="text-4xl">4 LEVELS. 1 CHAMPION.</h2>
             <p className="text-gray-300 leading-relaxed text-xl">
               Unlock the secrets of the blockchain. Solve tasks, earn badges, and prove your 
-              mastery in person to the guardians. Only the students of <span className="text-primary font-bold">@iiitl.ac.in</span> can enter the arena.
+              mastery in person to the guardians. 
             </p>
             
             <div className="pt-8">
@@ -41,7 +41,7 @@ export default async function Home() {
                   }}
                 >
                   <button type="submit" className="gold-button">
-                    Forge Your Identity (Login with Google)
+                    Login with Google
                   </button>
                 </form>
               )}
@@ -54,9 +54,9 @@ export default async function Home() {
         </section>
 
         <footer className="pt-20 text-gray-500 text-sm tracking-widest uppercase pb-12">
-          &copy; 2026 IIITL Web3 Devsprint &bull; Strictly for the Elite
+          &copy; 2026 IIITL  &bull; AXIOS WEB3 WING
         </footer>
       </div>
     </main>
   );
-}
+} 
